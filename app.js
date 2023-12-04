@@ -46,7 +46,7 @@ app.use(express.static("./public"));
 app.use(fileUpload());
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/users", callRouter);
+app.use("/api/v1/calls", callRouter);
 
 
 app.use(notFoundMiddleware);
