@@ -2,7 +2,6 @@ const { StatusCodes } = require("http-status-codes");
 const CustomError = require("../errors");
 const { checkPermissions } = require("../utils");
 const CallRecord = require("../models/Call");
-const { findOneAndUpdate } = require("../models/User");
 
 //  get all calls
 const getAllCalls = async (req, res) => {
@@ -55,7 +54,7 @@ const deleteCall = async (req, res) => {
   }
 
   try {
-    const deletedRecord = await CallRecord.findByIdAndRemove({ _id: recordId });
+    const deletedRecord = await CallRecord.remove({ _id: recordId });
     res.status(StatusCodes.OK).json({ status: "deleted", deletedRecord });
   } catch (error) {
     throw new CustomError.BadRequestError("Please provide record id");
@@ -80,7 +79,7 @@ const updateCall = async (req, res) => {
       "Record with id " + recordId + " not found",
     );
   }
-  res.status(StatusCodes.OK).json({ status: "deleted", updatedRecord });
+  res.status(StatusCodes.OK).json({ status: "updated", updatedRecord });
 };
 
 module.exports = {
