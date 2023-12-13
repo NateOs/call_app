@@ -25,6 +25,7 @@ const callRouter = require("./routes/callRoutes");
 // middleware
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
+const { authenticateUser } = require("./middleware/authentication");
 
 app.set("trust proxy", 1);
 /* app.use(
@@ -45,8 +46,8 @@ app.use(express.static("./public"));
 app.use(fileUpload());
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/calls", callRouter);
-app.use("/api/v1/users", userRouter);
+app.use("/api/v1/calls", authenticateUser, callRouter);
+app.use("/api/v1/users", authenticateUser, userRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

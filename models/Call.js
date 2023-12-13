@@ -9,11 +9,11 @@ const CallRecordSchema = mongoose.Schema({
     enum: ["resolved", "pending", "cancelled", "new"],
     default: "new",
   },
-  /*   owner: {
-    type: mongoose.Schema.ObjectId,
+  user: {
+    type: mongoose.Types.ObjectId,
     ref: "User",
     required: true,
-  }, */
+  },
 });
 
 module.exports = mongoose.model("CallRecord", CallRecordSchema);
