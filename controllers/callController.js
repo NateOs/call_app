@@ -35,7 +35,7 @@ const getSingleCall = async (req, res) => {
 //  create a call record
 
 const createCall = async (req, res) => {
-  console.log(req.body);
+  req.body.user = req.user.userId;
   if (!req.body) {
     throw new CustomError.BadRequestError("Please provide valid data");
   }
